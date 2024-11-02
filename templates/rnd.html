@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research and Development - Agriculture</title>
+    <style>
+        /* Basic styling for body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #2f4f2f;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container for the entire page */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header styling */
+        header {
+            width: 100%;
+            background-color: #2f4f2f;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        /* Section styling */
+        .section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.9); /* Transparent white */
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            width: 100%;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            color: #2f4f2f;
+            margin-bottom: 10px;
+        }
+
+        /* Frame styling */
+        .frame {
+            width: 100%;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: rgba(240, 255, 240, 0.8); /* Light green background */
+            margin-bottom: 20px;
+        }
+
+        /* Card for each research or development item */
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 8px;
+            background-color: white;
+            margin: 10px;
+            width: 100%;
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .card h3 {
+            color: #4CAF50;
+            margin: 15px 0 5px;
+        }
+
+        .card p {
+            text-align: center;
+            font-size: 1em;
+            line-height: 1.5em;
+            color: #333;
+        }
+
+        /* Button styling for interaction */
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        /* Grid for research items */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 60px;
+            width: 90%;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: rgb(254, 254, 254);
+            color: white;
+            /*background: linear-gradient(to right, #4CAF50, #A8DAB5, #F4FFFA);*/
+        }
+
+        /* Company logo */
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-right: 100px;
+        }
+
+        /* Navigation bar styles */
+        nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            background-color: #3e8e41;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            background-color: #2e7031;
+            transition: background-color 0.3s ease;
+        }
+        .marquee {
+            background-color: #e0f7fa; /* Light cyan background */
+            color: red; /* Green text color */
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+      
+        <!-- Logo -->
+        <img src="{{ url_for('static', filename='images/agri-logo.jpg') }}" alt="Minali Medicinal LLP Logo" class="logo-image" style="height: 150px; width: 200px; border: none; margin-right: 0px;">
+        <!--<div class="logo">Minali Medicinal LLP</div>-->
+
+        <!-- Navigation bar -->
+        <nav>
+            <ul>
+                <li><a href="{{url_for('index')}}">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="{{url_for('services')}}">Services</a></li>
+                <li><a href="{{url_for('blog')}}">Blog</a></li>
+                <li><a href="{{url_for('rnd')}}">R&D</a></li>
+                <li><a href="{{ url_for('index') }}#contactInfo">Contact Us</a></li>
+                <li><a href="{{ url_for('register') }}">Register</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            </ul>
+        </nav>
+        
+    </header>
+    <!-- Marquee for daily updates -->
+    <marquee class="marquee" behavior="scroll" direction="left">
+        Stay tuned for our latest updates: New pesticides arriving soon! Special discounts on bulk orders!
+    </marquee>
+
+    
+    <div class="container">
+        <section class="section">
+            <h2>Ongoing Research and Innovations</h2>
+            <div class="frame">
+                <p>Explore our latest research in crop improvement, soil health, sustainable practices, and more. Dive into the breakthroughs that are shaping the future of agriculture.</p>
+            </div>
+            <div class="grid">
+                <!-- Sample Card for a Research Topic -->
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/r1.jpg') }}" alt="Crop Research Image">
+                    <h3>Crop Yield Enhancement</h3>
+                    <p>Explore advanced methods and technologies that enhance crop yield and resilience to changing climates.</p>
+                    <a href="#" class="button">Learn More</a>
+                </div>
+
+                <!-- Additional research cards with images, headings, descriptions, and buttons -->
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/r2.png') }}" alt="Soil Health Image">
+                    <h3>Soil Health Improvement</h3>
+                    <p>Discover sustainable practices that improve soil fertility and support long-term agricultural productivity.</p>
+                    <a href="#" class="button">Read More</a>
+                </div>
+
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/r3.avif') }}" alt="Water Conservation Image">
+                    <h3>Water Conservation</h3>
+                    <p>Learn about efficient irrigation techniques and water management practices for sustainable agriculture.</p>
+                    <a href="#" class="button">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Development Programs and Progress</h2>
+            <div class="frame">
+                <p>We are committed to the continuous development of agricultural methods and technologies to support farmers and the global food supply chain.</p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/r4.jpg') }}" alt="Farmer Support Image">
+                    <h3>Farmer Support Initiatives</h3>
+                    <p>Providing resources, training, and support to empower farmers for better agricultural practices and growth.</p>
+                    <a href="#" class="button">Get Involved</a>
+                </div>
+
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/r5.webp') }}" alt="Agritech Image">
+                    <h3>AgriTech Innovations</h3>
+                    <p>Advancing agriculture with smart technologies like precision farming, IoT, and AI-based solutions.</p>
+                    <a href="#" class="button">Discover More</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

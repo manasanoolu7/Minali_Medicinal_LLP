@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Users</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h2>Registered Users</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Region</th>
+            <th>Soil Type</th>
+            <th>Water Source</th>
+            <th>Irrigation Type</th>
+            <th>Crop Type</th>
+            <th>Contact</th>
+            <th>OTP</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.age }}</td>
+            <td>{{ user.region }}</td>
+            <td>{{ user.soil_type }}</td>
+            <td>{{ user.water_source }}</td>
+            <td>{{ user.irrigation_type }}</td>
+            <td>{{ user.crop_type }}</td>
+            <td>{{ user.contact }}</td>
+            <td>{{ user.otp }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

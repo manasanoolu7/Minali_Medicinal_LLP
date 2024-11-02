@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #2f4f2f;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container for the entire page */
+        .container {
+            display: flex;
+            flex-direction: column;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #2f4f2f;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        /* Service section styling */
+        .section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        /* Frame for each service */
+        .service-frame {
+            background-color: rgba(240, 255, 240, 0.9);
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            flex: 1 1 calc(30% - 20px);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-frame:hover {
+            transform: scale(1.05);
+        }
+
+        .service-frame img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .service-frame h3 {
+            color: #4CAF50;
+            margin: 10px 0;
+        }
+
+        .service-frame p {
+            color: #333;
+            line-height: 1.5em;
+        }
+
+        /* Achievements section */
+        .achievements {
+            margin-top: 40px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .achievements h2 {
+            color: #4CAF50;
+        }
+
+        .achievement {
+            margin-top: 15px;
+            padding: 10px;
+            border-left: 4px solid #4CAF50;
+            background-color: rgba(240, 255, 240, 0.5);
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: rgb(254, 254, 254);
+            color: white;
+            /*background: linear-gradient(to right, #4CAF50, #A8DAB5, #F4FFFA);*/
+        }
+
+        /* Company logo */
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-right: 100px;
+        }
+
+        /* Navigation bar styles */
+        nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            background-color: #3e8e41;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            background-color: #2e7031;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Marquee styles */
+        .marquee {
+            background-color: #e0f7fa; /* Light cyan background */
+            color: red; /* Green text color */
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+      
+        <!-- Logo -->
+        <img src="{{ url_for('static', filename='images/agri-logo.jpg') }}" alt="Minali Medicinal LLP Logo" class="logo-image" style="height: 150px; width: 200px; border: none; margin-right: 0px;">
+        <!--<div class="logo">Minali Medicinal LLP</div>-->
+
+        <!-- Navigation bar -->
+        <nav>
+            <ul>
+                <li><a href="{{url_for('index')}}">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="{{url_for('services')}}">Services</a></li>
+                <li><a href="{{url_for('blog')}}">Blog</a></li>
+                <li><a href="{{url_for('rnd')}}">R&D</a></li>
+                <li><a href="{{ url_for('index') }}#contactInfo">Contact Us</a></li>
+                <li><a href="{{ url_for('register') }}">Register</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            </ul>
+        </nav>
+        
+    </header>
+    <div class="container">
+        <header>
+            <h1>Our Services</h1>
+        </header>
+
+        <div class="section">
+            <div class="service-frame">
+                <img src="{{ url_for('static', filename='images/service1.jpg') }}" alt="Consultation Services">
+                <h3>Consultation Services</h3>
+                <p>We provide expert consultation for farmers to enhance their agricultural practices and productivity.</p>
+            </div>
+
+            <div class="service-frame">
+                <img src="{{ url_for('static', filename='images/service2.jpg') }}" alt="Research and Development">
+                <h3>Research and Development</h3>
+                <p>Continuous research to improve crop varieties, soil health, and sustainable farming techniques.</p>
+            </div>
+
+            <div class="service-frame">
+                <img src="{{ url_for('static', filename='images/service3.jpg') }}" alt="Training Programs">
+                <h3>Training Programs</h3>
+                <p>Hands-on training sessions for farmers on the latest agricultural technologies and methodologies.</p>
+            </div>
+
+            <div class="service-frame">
+                <img src="{{ url_for('static', filename='images/service4.jpg') }}" alt="AgriTech Solutions">
+                <h3>AgriTech Solutions</h3>
+                <p>Innovative technology solutions for precision farming, crop monitoring, and data analysis.</p>
+            </div>
+
+            <div class="service-frame">
+                <img src="{{ url_for('static', filename='images/service5.jpg') }}" alt="Sustainability Practices">
+                <h3>Sustainability Practices</h3>
+                <p>Implementing sustainable practices that enhance soil health and conserve resources for future generations.</p>
+            </div>
+
+            <div class="service-frame">
+                <img src="{{ url_for('static', filename='images/service6.jpg') }}" alt="Market Access">
+                <h3>Market Access</h3>
+                <p>Connecting farmers to markets, ensuring fair prices and better access to their products.</p>
+            </div>
+        </div>
+
+        <div class="achievements">
+            <h2>Our Achievements</h2>
+            <div class="achievement">
+                <strong>Certified Organic Producer</strong> - Recognized for our commitment to organic farming practices.
+            </div>
+            <div class="achievement">
+                <strong>Innovation Award</strong> - Awarded for developing cutting-edge AgriTech solutions.
+            </div>
+            <div class="achievement">
+                <strong>Community Leadership</strong> - Acknowledged for our role in supporting local farming communities.
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

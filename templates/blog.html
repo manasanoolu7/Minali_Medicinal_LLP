@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Blog</title>
+    <style>
+        /* Overall page styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #2f4f2f;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container */
+        .container {
+            display: flex;
+            flex-direction: row;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+
+        /* Blog Main Content */
+        .main-content {
+            flex: 3;
+            padding: 20px;
+            margin: 20px;
+            background-color: rgba(240, 255, 240, 0.9); /* Light green background */
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Blog post styling */
+        .blog-post {
+            margin-bottom: 30px;
+        }
+
+        .blog-post h2 {
+            color: #4CAF50;
+        }
+
+        .blog-post img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .blog-post p {
+            font-size: 1em;
+            line-height: 1.6em;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        /* Comments section */
+        .comments-section {
+            margin-top: 30px;
+        }
+
+        .comments-section h3 {
+            color: #4CAF50;
+        }
+
+        .comment-box {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+        }
+
+        .comment-box textarea {
+            padding: 10px;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            width: 100%;
+            resize: vertical;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .comment-box button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .comment-box button:hover {
+            background-color: #45a049;
+        }
+
+        /* Sidebar Styling for Achievements */
+        .sidebar {
+            flex: 1;
+            position: sticky;
+            top: 20px;
+            margin: 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.9); /* Light transparent white */
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h3 {
+            color: #4CAF50;
+            text-align: center;
+        }
+
+        .achievement {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #4CAF50;
+            border-radius: 5px;
+            background-color: rgba(240, 255, 240, 0.8);
+        }
+
+        .achievement h4 {
+            color: #2f4f2f;
+        }
+
+        .achievement p {
+            font-size: 0.9em;
+            line-height: 1.4em;
+            color: #333;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: rgb(254, 254, 254);
+            color: white;
+            /*background: linear-gradient(to right, #4CAF50, #A8DAB5, #F4FFFA);*/
+        }
+
+        /* Company logo */
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-right: 100px;
+        }
+
+        /* Navigation bar styles */
+        nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            background-color: #3e8e41;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            background-color: #2e7031;
+            transition: background-color 0.3s ease;
+        }
+        .marquee {
+            background-color: #e0f7fa; /* Light cyan background */
+            color: red; /* Green text color */
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+      
+        <!-- Logo -->
+        <img src="{{ url_for('static', filename='images/agri-logo.jpg') }}" alt="Minali Medicinal LLP Logo" class="logo-image" style="height: 150px; width: 200px; border: none; margin-right: 0px;">
+        <!--<div class="logo">Minali Medicinal LLP</div>-->
+
+        <!-- Navigation bar -->
+        <nav>
+            <ul>
+                <li><a href="{{url_for('index')}}">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="{{url_for('services')}}">Services</a></li>
+                <li><a href="{{url_for('blog')}}">Blog</a></li>
+                <li><a href="{{url_for('rnd')}}">R&D</a></li>
+                <li><a href="{{ url_for('index') }}#contactInfo">Contact Us</a></li>
+                <li><a href="{{ url_for('register') }}">Register</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            </ul>
+        </nav>
+        
+    </header>
+    <!-- Marquee for daily updates -->
+    <marquee class="marquee" behavior="scroll" direction="left">
+        Stay tuned for our latest updates: New pesticides arriving soon! Special discounts on bulk orders!
+    </marquee>
+
+    <div class="container">
+        <!-- Main Blog Content -->
+        <div class="main-content">
+            <div class="blog-post">
+                <h2>Understanding Sustainable Agriculture</h2>
+                <img src="{{ url_for('static', filename='images/blog1.jpg') }}" alt="Sustainable Agriculture">
+                <p>Explore the latest research and developments in sustainable agriculture, aiming to improve crop yields, conserve resources, and ensure food security...</p>
+            </div>
+
+            <div class="blog-post">
+                <h2>Innovations in Pesticide Management</h2>
+                <img src="{{ url_for('static', filename='images/blog2.jpg') }}" alt="Pesticide Management">
+                <p>Discover the advancements in pesticide technology that help minimize environmental impact while protecting crops...</p>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comments-section">
+                <h3>Comments</h3>
+                <div class="comment-box">
+                    <textarea placeholder="Leave a comment..."></textarea>
+                    <button>Post Comment</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar for Achievements -->
+        <div class="sidebar">
+            <h3>Our Achievements</h3>
+
+            <!-- Sample Achievements -->
+            <div class="achievement">
+                <h4>National Agriculture Award</h4>
+                <p>Received the National Agriculture Award for outstanding research in crop resilience and sustainable practices.</p>
+            </div>
+
+            <div class="achievement">
+                <h4>Best Innovation in AgriTech</h4>
+                <p>Awarded for leading advancements in AI-driven crop monitoring technologies.</p>
+            </div>
+
+            <div class="achievement">
+                <h4>Community Impact Award</h4>
+                <p>Recognized for impactful initiatives that support local farmers with modern resources and training.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

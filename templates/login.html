@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Basic styling for the entire page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Prevent overflow for a cleaner look */
+        }
+
+        /* Container for the login and information sections */
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100%; /* Full height of the viewport */
+            max-width: 1200px; /* Optional: set a max width for larger screens */
+        }
+
+        /* Login form styling */
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 30%; /* Set a fixed percentage for responsiveness */
+            min-width: 300px; /* Minimum width to maintain usability */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center contents vertically */
+            align-items: center; /* Center contents horizontally */
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .login-container label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            text-align: left; /* Align labels to the left */
+            width: 100%; /* Ensure label width is 100% */
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-container button {
+            width: 70%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px; /* Space between the button and inputs */
+        }
+
+        .login-container button:hover {
+            background-color: #45a049;
+        }
+
+        /* Styling for the information section */
+        .info-container {
+            flex-grow: 1; /* Allow this section to grow and fill space */
+            background-color: #e8f5e9; /* Light green background */
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            position: relative; /* Position relative for the banner */
+            overflow: hidden; /* Hide overflow for smooth transitions */
+        }
+
+        .banner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover; /* Cover the entire container */
+            background-position: center; /* Center the background image */
+            transition: background-image 1s ease-in-out; /* Smooth transition effect */
+        }
+
+        .info-content {
+            position: relative; /* Position relative for stacking order */
+            z-index: 1; /* Ensure text is above the banner */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%; /* Full height for vertical centering */
+            padding: 20px;
+        }
+
+        .info-content h2 {
+            text-align: center;
+        }
+
+        .info-content p {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        /* Register button styling */
+        .register-button {
+            display: block;
+            width: 70%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none; /* Remove underline */
+            margin-top: 15px; /* Space above the button */
+        }
+
+        .register-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Styling for registration prompt */
+        .register-prompt {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .register-prompt a {
+            color: #f7faf7; /* Link color */
+            text-decoration: none; /* Remove underline */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="login-container">
+            <h2>Login</h2>
+            <form id="otpForm" method="POST" action="/login">
+                <label for="contact">Contact Number:</label>
+                <input type="text" id="contact" name="contact" required>
+
+                <button type="button" id="generateOtpButton">Generate OTP</button>
+
+                <label for="otp">OTP:</label>
+                <input type="password" id="otp" name="otp" required>
+
+                <button type="submit">Submit</button>
+                <div class="register-prompt">
+                    <p>Not registered yet?</p>
+                    <a href="{{ url_for('register') }}" class="register-button">Register</a> <!-- Registration button -->
+                </div>
+            </form>
+        </div>
+
+        <div class="info-container">
+            <div class="banner" id="banner"></div> <!-- Banner div for background images -->
+            <div class="info-content">
+                <h2>Agriculture Information</h2>
+                <p>Stay updated with the latest trends in agriculture.</p>
+                <p>Learn about sustainable practices and innovations.</p>
+                <p>Join our community for tips and resources!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('generateOtpButton').addEventListener('click', function() {
+            var contact = document.getElementById('contact').value;
+            if (contact) {
+                // Make a POST request to your backend to generate and send OTP
+                fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ contact: contact })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message); // Show success or failure message
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error generating OTP. Please try again.');
+                });
+            } else {
+                alert('Please enter your contact number.');
+            }
+        });
+    </script>
+
+    <script src="{{ url_for('static', filename='models/scriptlogic.js') }}"></script> <!-- Link to the external JavaScript file -->
+</body>
+</html>

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minali Medicinal LLP</title>
+
+    <!-- Add CSS Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}"> <!-- Jinja CSS link -->
+    <style>
+        .hero {
+            background-image: url("{{ url_for('static', filename='images/bg2.avif') }}");
+        }
+        .about-us {
+            background-image: url("{{ url_for('static', filename='images/bg6.jpg') }}"); /* Jinja-compatible path */
+        }
+        .about-text {
+            text-align: justify;
+            line-height: 1.6;
+            overflow-wrap: break-word;
+            padding: 40px;
+            margin: 10;
+            max-width: 70%;
+            box-sizing: border-box;
+            background-color: transparent;
+            display: block;
+        }
+        /* General body styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f0;
+            overflow-x: hidden; /* Prevents horizontal scrolling */
+            background: linear-gradient(to right, rgb(243, 246, 243), rgb(236, 238, 236));
+        }
+
+        /* Header section */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: rgb(254, 254, 254);
+            color: white;
+            /*background: linear-gradient(to right, #4CAF50, #A8DAB5, #F4FFFA);*/
+        }
+
+        /* Company logo */
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-right: 100px;
+        }
+
+        /* Navigation bar styles */
+        nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            background-color: #3e8e41;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            background-color: #2e7031;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Marquee styles */
+        .marquee {
+            background-color: #e0f7fa; /* Light cyan background */
+            color: red; /* Green text color */
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            width: 100%;
+            height: 67vh;
+            
+            background-size: contain;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s forwards 0.5s;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 18px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+            color: white;
+        }
+
+        /* Styles for the transparent rectangle box in the hero section */
+        .hero-content {
+            background-color: rgba(255, 255, 150, 0.5); /* Semi-transparent white background */
+            padding: 20px 40px; /* Padding around the text */
+            border-radius: 10px; /* Rounded corners */
+            text-align: center; /* Center the text */
+            max-width: 80%; /* Limit the width of the box */
+            margin: 0 auto; /* Center the box horizontally */
+        }
+
+        /* Animation for fading in the hero section */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Main content */
+        main {
+            padding: 50px;
+            background-color: #ffffff;
+        }
+
+        /* Section titles */
+        h2 {
+            font-size: 36px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        /* Description sections */
+        .section-description {
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeIn 1s forwards;
+            text-align: center;
+        }
+
+        .section-description p {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Animation for fading in sections */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive product cards */
+        .prod-description {
+            position: relative;
+            overflow: hidden;
+            width: 100%; /* Ensure the section covers the entire width */
+            color: rgb(193, 21, 21);
+            margin-top: 0px; /* Space above the div */
+            margin-bottom: 0px; /* Space below the div */
+            padding: 20px; /* Optional: Add padding to give some space inside the container */
+            height: auto; /* Ensure height adapts to the content */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+
+        .carousel {
+            display: flex;
+            white-space: nowrap; /* Prevents line breaks between items */
+            animation: scroll 25s linear infinite; /* Animation duration and infinite looping */
+            width: calc(200%); /* Adjust width to accommodate duplicated items */
+        }
+
+        .product-card {
+            margin: 0 20px; /* Add margin for spacing */
+            transition: transform 0.3s; /* Smooth transition for hover effect */
+            background: rgba(246, 248, 246, 0.5); /* Semi-transparent background for cards */
+            border-radius: 8px; /* Rounded corners */
+            padding: 8px; /* Padding inside cards */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+            min-width: 200px; /* Ensure a minimum width for each card */
+            height: 200px;
+            border: none;
+        }
+
+        /* Keep hover effect */
+        .product-card:hover {
+            transform: scale(1.1); /* Slight zoom effect on hover */
+        }
+
+        .product-card img {
+            width: 70%; /* Make the image take up the full width of the card */
+            height: 60%; /* Maintain aspect ratio */
+            border-radius: 2px; /* Match the card border radius for consistency */
+        }
+
+        /* Animation keyframes for scrolling */
+        @keyframes scroll {
+            50% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* Footer section */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .about-us {
+            position: relative;
+            padding: 50px;
+            background-color: rgba(165, 245, 171, 0.3); /* Light transparent background */
+            width: 100%;
+            box-sizing: border-box;
+           
+           
+        }
+
+        /* Frame for Heading */
+        .about-us h2 {
+            background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent frame for heading */
+            padding: 15px 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 0 auto 20px auto; /* Center heading and add bottom margin */
+            max-width: 90%;
+            border: 0px solid rgba(100, 100, 100, 0.2); /* Light border around heading */
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+        }
+
+        /* Frame for Content */
+        .about-content {
+            background-color: rgba(31, 85, 4, 0.4); /* Semi-transparent frame for description */
+            padding: 20px;
+            border-radius: 8px;
+            box-sizing: border-box;
+            max-width: 70%;
+            margin: 0 auto;
+            border: 1px solid rgba(100, 100, 100, 0.2); /* Light border around content */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+        }
+
+        /* Text styling within Content */
+        .about-text {
+            text-align: justify;
+            line-height: 1.6;
+            overflow-wrap: break-word;
+            padding: 10px;
+            margin: 10;
+            max-width: 90%;
+            box-sizing: border-box;
+            background-color: transparent;
+            border: 0px solid rgba(200, 200, 200, 0.5); /* Optional: subtle border */
+            color: rgb(247, 249, 247);
+            
+        }
+
+        .more-link {
+            font-size: 14px;
+            color: #fcfcfd;
+            text-decoration: none;
+            border: 1px solid #2a9d8f;
+            padding: 5px 10px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-top: 0px;
+        }
+
+        .more-link:hover {
+            background-color: #2a9d8f;
+            color: white;
+        }
+        .more-text {
+            display: none;
+        }
+
+        .chatbot-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .chatbox-content {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 350px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .chatbox-header {
+            background-color: #2e7031;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbox-header h4 {
+            margin: 0;
+        }
+
+        .close-btn {
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .chatbox-body {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .chatbox-footer {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #f0f0f0;
+            border-radius: 20px;
+            font-size: 16px;
+        }
+
+        .chat-messages {
+            margin-bottom: 10px;
+        }
+        .chat-messages {
+            margin-bottom: 10px;
+        }
+
+        .user-message {
+            background-color: #DCF8C6;
+            color: #333;
+            padding: 8px;
+            border-radius: 8px;
+            margin: 5px 0;
+            text-align: right;
+            align-self: flex-end;
+            max-width: 80%;
+        }
+
+        .bot-message {
+            background-color: #F1F0F0;
+            color: #333;
+            padding: 8px;
+            border-radius: 8px;
+            margin: 5px 0;
+            text-align: left;
+            align-self: flex-start;
+            max-width: 80%;
+        }
+
+        .chatbox-body {
+            display: flex;
+            flex-direction: column;
+        }
+
+    </style>
+    
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+      
+        <!-- Logo -->
+        <img src="{{ url_for('static', filename='images/agri-logo.jpg') }}" alt="Minali Medicinal LLP Logo" class="logo-image" style="height: 150px; width: 200px; border: none; margin-right: 0px;">
+        <!--<div class="logo">Minali Medicinal LLP</div>-->
+
+        <!-- Navigation bar -->
+        <nav>
+            <ul>
+                <li><a href="{{url_for('index')}}">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="{{url_for('services')}}">Services</a></li>
+                <li><a href="{{url_for('blog')}}">Blog</a></li>
+                <li><a href="{{url_for('rnd')}}">R&D</a></li>
+                <li><a href="#contactInfo">Contact Us</a></li>
+                <li><a href="{{ url_for('register') }}">Register</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            </ul>
+        </nav>
+        
+    </header>
+
+    <!-- Marquee for daily updates -->
+    <marquee class="marquee" behavior="scroll" direction="left">
+        Stay tuned for our latest updates: New pesticides arriving soon! Special discounts on bulk orders!
+    </marquee>
+
+    <!-- Hero Section (Full-width image) -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+        <h1>Welcome to Minali Medicinal LLP</h1>
+        <p>Your trusted partner for sustainable agricultural solutions</p>
+    </div>
+    </section>
+
+    <!-- Main Content -->
+     <!-- About Us Section -->
+    <section class="about-us" id="about">
+        <h2>About Us</h2>
+        <div class="about-description"></div>
+        <div class="about-content">
+            <p class="about-text" id="aboutText">
+                Minali Innovations offers certified organic biological solutions that enhance plant health and crop protection, leading to increased productivity and promoting chemical-free agricultural practices. As an 11-month-old start-up, we have rapidly established a reputation for excellence in the market, consistently delivering outstanding results. At Minali, we craft our products through a unique and proprietary process: BIOPROCESS TECHNOLOGY (BPT). This cutting-edge technology employs selective microorganisms, combined with plant metabolites, to develop safer and more effective products for integrated crop management. BPT contributes to the creation of organic products that enhance ecosystems by improving the carbon cycle.
+                <span class="more-text" id="moreText" style="display: none;">Founded on June 6, 2019, in Bangalore, India, by a team of passionate agribusiness professionals, Minali Innovations was created with a vision to provide comprehensive solutions for organic agriculture. The company is supported by a dedicated R&D team and state-of-the-art infrastructure that enables us to offer non-toxic, biodegradable, and certified organic agricultural inputs to optimize crop nutrition and plant protection. Drawing from extensive knowledge in agricultural sciences and modern fermentation techniques, we named the company "Minali Innovations" to reflect our focus on innovation in sustainable farming.
+    
+                Our portfolio includes high-quality organic fertilizers, biofertilizers, soil conditioners, micronutrients, organic pesticides, biopesticides, organic nematicides, pheromone traps, water-soluble organic nutrients, and plant growth regulators.
+                With agriculture being the primary source of livelihood for about 58% of India’s population, farmers face numerous challenges related to crop productivity, soil health, ecosystem balance, and pest resistance. India’s agricultural exports are often hindered by high chemical residues. Despite farmers’ awareness of the benefits of organic inputs, access to high-quality organic products that guarantee productivity is limited, leading many to resort to harmful chemicals. Minali Innovations addresses these challenges by providing comprehensive organic crop solutions that are cost-effective, easy to adopt, and ensure higher productivity.</span>
+            </p>
+            <a href="{{ url_for('aboutus') }}" class="more-link">Read More</a>
+        </div>
+    </section>
+    
+    <!-- Products Section -->
+    <section class="prod-description" id="products">
+        <div class="heading-frame">
+            <h2 class="prod-head">Our Products</h2>
+        </div>
+    <div class="cards-frame">
+        <div class="carousel" id="carousel">
+            <div class="product-card">
+                <img src="{{ url_for('static', filename='images/p1.jpeg') }}" alt="Pesticide 1">
+                <p>Pesticide A</p>
+            </div>
+            <div class="product-card">
+                <img src="{{ url_for('static', filename='images/p2.jpg') }}" alt="Pesticide 2">
+                <p>Pesticide B</p>
+            </div>
+            <div class="product-card">
+                <img src="{{ url_for('static', filename='images/p3.jpg') }}" alt="Pesticide 3">
+                <p>Pesticide C</p>
+            </div>
+            <div class="product-card">
+                <img src="{{ url_for('static', filename='images/p4.jpg') }}" alt="Pesticide 4">
+                <p>Pesticide D</p>
+            </div>
+            <div class="product-card">
+                <img src="{{ url_for('static', filename='images/p5.jpg') }}" alt="Pesticide 5">
+                <p>Pesticide E</p>
+            </div>
+            <!-- Add more product cards here -->
+        </div>
+    </div>
+    </section>
+
+    <!-- R&D Section -->
+    <section class="rnd-description" id="rnd">
+        <div class="rnd-container" style="display: flex; justify-content: space-between; align-items: center; gap: 20px;">
+            <div class="rnd-heading" style="background-color: rgba(255, 255, 255, 0.3); border-radius: 10px; padding: 20px;">
+                <h2 style="font-size: 36px;margin-bottom: 20px;color: #4CAF50;">Research & Development</h2>
+            </div>
+            <div class="rnd-content" style="background-color: rgba(255, 255, 255, 0.3); border-radius: 10px;">
+                <p style="font-size: 16px; color: #666; line-height: 1.6;">
+                    Our R&D team is dedicated to continuously innovating and refining sustainable solutions for agricultural challenges. 
+                    With a focus on advanced biological processes, Minali's R&D works on enhancing crop yield, soil health, and eco-friendly 
+                    practices. Our proprietary methods integrate selective microorganisms and organic compounds to deliver results that boost 
+                    productivity while minimizing environmental impact. Each development phase is thoroughly tested to ensure that we deliver 
+                    cutting-edge, certified organic products that enhance both the carbon cycle and the overall ecosystem. 
+                    From fertilizers to biopesticides, our team is committed to creating solutions that support the future of agriculture.
+                </p>
+            </div>
+        </div>
+    </section>
+
+     <!-- Chatbot Button and Container -->
+     <div id="chatbot">
+        <div class="chatbot-icon" onclick="toggleChatbot()">
+            <img src="{{ url_for('static', filename='chat-icon.png') }}" alt="Chat" width="50" height="50">
+        </div>
+        <div id="chatbox" class="chatbox-content" style="display: none;">
+            <div class="chatbox-header">
+                <h4>Agriculture Chatbot</h4>
+                <button onclick="closeChatbot()">X</button>
+            </div>
+            <div class="chatbox-body">
+                <div id="chat-messages" class="chat-messages"></div>
+            </div>
+            <div class="chatbox-footer">
+                <input type="text" id="user-input" placeholder="Ask your agriculture question..." onkeypress="if(event.key === 'Enter') sendMessage()">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+
+
+    <!-- Footer Section -->
+    <footer id="contactInfo">
+        <div>
+            <div>
+                <h3 style="color: rgb(73, 76, 73); text-transform: uppercase;">Contact</h3>
+                <p>Phone: +91 12345 67890</p>
+                <p>Email: info@minalimedicinal.com</p>
+            </div>
+
+            <div>
+                <h3 style="color: rgb(73, 76, 73); text-transform: uppercase;">Address</h3>
+                <p>Minali Medicinal LLP <br>
+                #12, Green Street, Bangalore, India <br>
+                Zip Code: 560001</p>
+            </div>
+
+            <div>
+                <h3 style="color: rgb(73, 76, 73); text-transform: uppercase;">Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest updates.</p>
+                <form>
+                    <input type="email" placeholder="Enter your email" style="padding: 10px; width: 80%; border-radius: 5px; border: none;">
+                    <button type="submit" style="padding: 10px 20px; background-color: #2e7031; color: white; border: none; border-radius: 5px; margin-top: 10px;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <h3 style="color: rgb(73, 76, 73); text-transform: uppercase;">Follow Us</h3>
+            <a href="https://facebook.com" target="_blank" style="margin-right: 15px;">
+                <img src="{{ url_for('static', filename='images/f1.avif') }}" alt="Facebook" style="width: 24px; height: 24px;">
+            </a>
+            <a href="https://twitter.com" target="_blank" style="margin-right: 15px;">
+                <img src="{{ url_for('static', filename='images/t1.png') }}" alt="Twitter" style="width: 24px; height: 24px;">
+            </a>
+            <a href="https://wa.me/your-number" target="_blank" style="margin-right: 15px;">
+                <img src="{{ url_for('static', filename='images/w1.avif') }}" alt="WhatsApp" style="width: 24px; height: 24px;">
+            </a>
+            <a href="https://youtube.com" target="_blank" style="margin-right: 15px;">
+                <img src="{{ url_for('static', filename='images/y1.png') }}" alt="YouTube" style="width: 24px; height: 24px;">
+            </a>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <p style="text-align: center; color: #666;">&copy; 2024 Minali Medicinal LLP. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</html>
