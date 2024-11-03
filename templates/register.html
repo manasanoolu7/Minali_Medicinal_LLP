@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Basic styling for the container */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        /* Overall container for the page */
+        .page-container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            background: linear-gradient(to right, #e0f7e9 50%, #ffffff 50%);
+        }
+
+        /* Left side (form) container */
+        .container {
+            width: 30%; /* Occupies the left half of the screen */
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: auto;
+        }
+
+        /* Right side (banner) container */
+        .banner {
+            width: 70%; /* Occupies the right half of the screen */
+            display: flex;
+            justify-content: center;
+            align-items: top;
+            background-color: #f4fff5;
+            color: #2e7d32;
+            font-size: 1.5em;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4CAF50; /* Green color for the title */
+        }
+
+        .form-scroll {
+            max-height: 400px; /* Set a maximum height */
+            overflow-y: auto; /* Enable vertical scrolling */
+            margin-bottom: 20px; /* Space between form and register button */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            margin-left: 50px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333; /* Dark text color */
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        button {
+            width: 30%;
+            padding: 10px;
+            background-color: #4CAF50; /* Green button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+        }
+        
+        .center-container p {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .center-container {
+            display: flex;
+            flex-direction: column; /* Stack button and text vertically */
+            align-items: center; /* Center horizontally */
+            gap: 10px; /* Space between button and paragraph */
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        .selfie-section {
+            display: block; /* Initially hidden */
+            text-align: left; /* Center align video and buttons */
+        }
+
+        video {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            display: none; /* Initially hidden */
+        }
+
+        #capturedImage {
+            margin-top: 10px;
+            display: none; /* Initially hidden */
+            width: 100%; /* Make image responsive */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+    <div class="container">
+        <h1>{{ heading }}</h1>
+        <div class="form-scroll"> <!-- Scrollable form area -->
+            <form id="registrationForm" method="POST" action="{{ url_for('register') }}">
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" required>
+                </div>
+                <div class="form-group">
+                    <label for="region">Region:</label>
+                    <input type="text" id="region" name="region" required>
+                </div>
+                <div class="form-group">
+                    <label for="soilType">Type of Soil:</label>
+                    <select id="soilType" name="soilType" required>
+                        <option value="">Select Soil Type</option>
+                        <option value="sandy">Sandy</option>
+                        <option value="clay">Clay</option>
+                        <option value="loamy">Loamy</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="waterSource">Water Source:</label>
+                    <input type="text" id="waterSource" name="waterSource" required>
+                </div>
+                <div class="form-group">
+                    <label for="irrigationType">Type of Irrigation:</label>
+                    <select id="irrigationType" name="irrigationType" required>
+                        <option value="">Select Irrigation Type</option>
+                        <option value="sprinkler">Sprinkler</option>
+                        <option value="drip">Drip</option>
+                        <option value="furrow">Furrow</option>
+                        <option value="centerPivot">Center Pivot</option>
+                        <option value="terraced">Terraced Irrigation</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cropType">Crop Type:</label>
+                    <input type="text" id="cropType" name="cropType" required>
+                </div>
+                <div class="form-group">
+                    <label for="contactDetails">Contact Details:</label>
+                    <input type="text" id="contactDetails" name="contactDetails" required>
+                </div>
+
+                <!-- Capture Selfie Button -->
+                <div class="form-group selfie-section" id="cameraSection">
+                    <label>Capture Selfie:</label>
+                    <button type="button" id="captureBtn" name="capturebtn">Capture</button>
+                </div>
+                <video id="video" autoplay></video>
+                <button type="button" id="takePhotoBtn" style="display: none;">Take Photo</button>
+                <img id="capturedImage" alt="Captured Image" />
+            </form>
+        </div>
+        <div class="center-container">
+        <button type="submit" form="registrationForm" >Register</button>
+        <p>Already registered? <a href="{{ url_for('login') }}">Login here</a></p>
+        </div>
+    </div>
+    <div class="banner">
+        <p>Welcome to Agro Biotech - Growing a Sustainable Future!</p>
+        <img src="{{ url_for('static', filename='images/l1.jpg') }}" id="banner_image">
+    </div>
+    </div>
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            // event.preventDefault();
+            // alert('Registration successful! Please log in.');
+            // window.location.href = '{{ url_for("login") }}';
+        });
+
+        // Capture Selfie Logic
+        const captureBtn = document.getElementById('captureBtn');
+        const cameraSection = document.getElementById('cameraSection');
+        const video = document.getElementById('video');
+        const takePhotoBtn = document.getElementById('takePhotoBtn');
+        const capturedImage = document.getElementById('capturedImage');
+
+        captureBtn.addEventListener('click', function () {
+            // Access the device camera only when the capture button is clicked
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function (stream) {
+                        video.style.display = 'block'; // Show video element
+                        takePhotoBtn.style.display = 'block'; // Show Take Photo button
+                        video.srcObject = stream; // Set the video source to the stream
+                        video.play();
+                    })
+                    .catch(function (err) {
+                        alert("Camera access is required to capture a selfie.");
+                    });
+            } else {
+                alert("Your device does not support camera access.");
+            }
+        });
+
+        takePhotoBtn.addEventListener('click', function () {
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Convert canvas to image data and display it
+            const dataURL = canvas.toDataURL('image/png');
+            capturedImage.src = dataURL;
+            capturedImage.style.display = 'block'; // Show the captured image
+
+            // Stop the video stream after capturing
+            const stream = video.srcObject;
+            const tracks = stream.getTracks();
+            tracks.forEach(function(track) {
+                track.stop();
+            });
+            video.style.display = 'none'; // Hide video element
+            takePhotoBtn.style.display = 'none'; // Hide Take Photo button
+        });
+    </script>
+</body>
+</html>
+

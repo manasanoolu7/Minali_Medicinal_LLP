@@ -1,0 +1,21 @@
+<!-- header.html -->
+
+<header>
+    <!-- Logo -->
+    <img src="{{ url_for('static', filename='images/agri-logo.jpg') }}" alt="Minali Medicinal LLP Logo" class="logo-image" style="height: 150px; width: 200px; border: none; margin-right: 0px;">
+    
+    <!-- Navigation bar --> 
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="{{ url_for('rnd') }}">R&D</a></li>
+            <li><a href="#contactInfo">Contact Us</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+        </ul>
+    </nav>
+</header>
