@@ -1,0 +1,26 @@
+{
+  "name": "minali",
+  "version": "1.0.0",
+  "description": "web page to serve agriculture purpose",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manasanoolu7/Minali_Medicinal_LLP.git"
+  },
+  "keywords": [
+    "HTML",
+    "JINJA",
+    "CSS",
+    "JAVASCRIPT",
+    "OPENAI"
+  ],
+  "author": "Dr. Manasa Devi Mortha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manasanoolu7/Minali_Medicinal_LLP/issues"
+  },
+  "homepage": "https://github.com/manasanoolu7/Minali_Medicinal_LLP#readme"
+}
