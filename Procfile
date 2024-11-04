@@ -1,1 +1,1 @@
-﻿web: echo "hello heroku"
+﻿web: python app.py
