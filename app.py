@@ -20,7 +20,7 @@ app = Flask(__name__)
 
 
 
-@app.route('/index')
+@app.route('/')
 def index():
     bg_image_url = url_for('static', filename='images/bg2.avif')
     return render_template('minali_flask.html', bg_image_url=bg_image_url)
