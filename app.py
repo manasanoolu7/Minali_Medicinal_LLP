@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
 import random
-from twilio.rest import Client
+
 import openai
 
 openai.api_key = '' 
@@ -15,12 +15,7 @@ app.config['SECRET_KEY'] = 'testing'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
-# Twilio credentials
-TWILIO_ACCOUNT_SID = ''
-TWILIO_AUTH_TOKEN = ''
-TWILIO_PHONE_NUMBER = ''
 
-client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
 
 
@@ -63,12 +58,7 @@ def login():
             otp = random.randint(100000, 999999)
             user.otp = otp  # Store OTP in memory (use a database in production)
             
-            # Send OTP via Twilio
-            message = client.messages.create(
-                body=f'Your OTP is: {otp}',
-                from_=TWILIO_PHONE_NUMBER,
-                to=contact
-            )
+            
         
             return jsonify({'message': 'OTP sent successfully!'})
         else:
