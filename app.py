@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 
 
 import random
-
+import os
 import openai
 
 openai.api_key = '' 
@@ -136,4 +136,5 @@ def aboutus():
 if __name__ == '__main__':
     # with app.app_context():
     #     db.create_all()  # Creates the SQLite database and tables if they don't exist
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, host="0.0.0.0", port=port)
