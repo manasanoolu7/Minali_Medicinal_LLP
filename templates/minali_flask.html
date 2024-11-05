@@ -412,27 +412,98 @@
         }
 
           
+        /* Media Query for Mobile Screens */
         @media (max-width: 768px) {
-            .logo-image {
-                max-height: 60px;
-            }
-            
-            h2 {
-                font-size: 1.5rem;
-            }
-            
-            /* Adjust text alignment and padding for smaller screens */
-            header, footer, main {
+            /* Header section */
+            header {
+                flex-direction: column;
                 text-align: center;
+            }
+
+            /* Company logo */
+            .logo {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            /* Navigation bar */
+            nav ul {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            /* Hero Section */
+            .hero {
+                height: 50vh;
+                background-size: cover;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero-content {
+                padding: 10px 20px;
+            }
+
+            /* Section titles */
+            h2 {
+                font-size: 28px;
+            }
+
+            /* Product cards */
+            .product-card {
+                margin: 10px 0;
                 padding: 10px;
             }
 
-            /* Make sure navbar collapses on smaller screens */
-            .navbar-nav {
+            /* Chatbot icon */
+            .chatbot-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            /* Chatbox */
+            .chatbox-content {
+                width: 90%;
+                right: 5%;
+                bottom: 70px;
+            }
+
+            .chatbox-header {
+                padding: 10px;
+            }
+
+            .chatbox-body {
+                padding: 10px;
+            }
+
+            /* Footer */
+            footer {
+                padding: 10px;
                 text-align: center;
+            }
+
+            /* Other adjustments as needed */
+            .about-content,
+            .about-text {
+                max-width: 100%;
+                padding: 10px;
             }
         }
 
+        /* Media Query for Larger Screens */
+        @media (min-width: 769px) {
+            /* Reset styles to original layout on larger screens */
+            .hero {
+                height: 67vh;
+                background-size: contain;
+            }
+
+            .about-content {
+                max-width: 70%;
+            }
+        }
     </style>
     
 </head>
