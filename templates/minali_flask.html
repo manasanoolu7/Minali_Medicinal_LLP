@@ -7,6 +7,7 @@
     <title>Minali Medicinal LLP</title>
 
     <!-- Add CSS Styles -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}"> <!-- Jinja CSS link -->
     <style>
         .hero {
@@ -408,6 +409,17 @@
         .chatbox-body {
             display: flex;
             flex-direction: column;
+        }
+
+          /* Mobile-specific styles */
+          @media only screen and (max-width: 768px) {
+            body {
+                font-size: 14px;
+                margin: 10px;
+            }
+            .container {
+                flex-direction: column; /* Stacks items vertically */
+            }
         }
 
     </style>
